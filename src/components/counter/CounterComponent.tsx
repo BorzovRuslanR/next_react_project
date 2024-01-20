@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { increment } from './CounterSlice'
+import { increment, dicriment } from './CounterSlice'
 import { Button } from '../ui/button'
 
 export default function CounterComponent() {
@@ -17,6 +17,9 @@ export default function CounterComponent() {
         <div>{counter}</div> 
         <Button onClick={() => dispatch(increment()) }>
             +
+        </Button>
+        <Button onClick={() => dispatch(dicriment()) }>
+            -
         </Button>
     </div>
   )
