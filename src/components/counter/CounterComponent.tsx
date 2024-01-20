@@ -1,14 +1,14 @@
 'use client';
 
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '@/lib/hooks'
 import { increment, dicriment } from './CounterSlice'
 import { Button } from '../ui/button'
 
 export default function CounterComponent() {
 
-    const dispatch = useDispatch();
-    const counter = useSelector(state => {
+    const dispatch = useAppDispatch();
+    const counter = useAppSelector(state => {
         return state.counter
     })
 
