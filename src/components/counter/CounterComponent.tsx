@@ -14,7 +14,7 @@ export default function CounterComponent() {
 
   return (
     <div>
-        <div>{counter}</div>
+        <div>{counter}</div> 
         <Button onClick={() => dispatch(increment()) }>
             +
         </Button>
