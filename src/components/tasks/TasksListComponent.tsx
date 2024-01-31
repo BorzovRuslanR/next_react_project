@@ -9,42 +9,20 @@ import { CollapsForm } from './CollapsForm';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card';
 import { Checkbox } from '../ui/checkbox';
 import { EditTask } from './EditTask';
+import Addtask from './Addtask';
 
 export default function TasksListComponent() {
 
   const dispatch = useAppDispatch()
   const tasks = useAppSelector(state => state.tasks)
-  
+
   useEffect(() => {
     dispatch(initStore())
   }, [])
 
   return (
     <div className='m-6'>
-      <CollapsForm>
-        <form className='flex flex-col gap-4' onSubmit={(event) => {
-            event.preventDefault()
-            const form = event.target
-            if(form instanceof HTMLFormElement) {
-            const formData = new FormData(form)
-            const title = formData.get('title') as string
-            const desc = formData.get('desc') as string
-
-            dispatch(addTask({
-              title,
-              desc,
-              id: String(Math.random()),
-              completed: false
-            }))
-          }
-          }}>
-          <Label htmlFor="title">Title</Label>
-          <Input type="text" id='title' name='title'/>
-          <Label htmlFor="desc">Description</Label>
-          <Input type="text" id='description' name='desc'/>
-          <Button type='submit'>Add</Button>
-        </form>
-      </CollapsForm>
+      <Addtask />
         <div className='py-2 grid grid-cols-1 sm:grid-cols-3 gap-1'>
           {
             tasks.map(task => {
