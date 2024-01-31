@@ -1,7 +1,7 @@
 'use client';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import React, { useState } from 'react'
-import { addTask, editTask, removeTask } from './TasksSlice';
+import React, { useEffect, useState } from 'react'
+import { addTask, editTask, initStore, removeTask } from './TasksSlice';
 import { Button } from '../ui/button';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
@@ -14,7 +14,10 @@ export default function TasksListComponent() {
 
   const dispatch = useAppDispatch()
   const tasks = useAppSelector(state => state.tasks)
-
+  
+  useEffect(() => {
+    dispatch(initStore())
+  }, [])
 
   return (
     <div className='m-6'>

@@ -7,12 +7,25 @@ export interface Task {
     completed: boolean;
 }
 
-const initialState = JSON.parse(localStorage.getItem('store') ?? 'null') 
 
 export const TasksSlice = createSlice({
     name: "Tasks",
-    initialState: (initialState?.tasks ?? []) as Task[],
+    initialState: [] as Task[],
     reducers: {
+        initStore(state) {
+            if (typeof window === 'undefined') return state;
+            const localStore = localStorage.getItem('store') ?? 'null'
+            if (localStore) {
+                try {
+                    const parsedStore = JSON.parse(localStore)
+                    if (typeof parsedStore === 'object' && 'tasks' in parsedStore) {
+                        return parsedStore.tasks
+                    }
+                } catch (error) {
+                    console.error(error)
+                }
+            }
+        },
         addTask(state, action: PayloadAction<Task>) {
             state.push(action.payload);
         },
@@ -36,7 +49,7 @@ export const TasksSlice = createSlice({
     },
 })
 
-export const { addTask, editTask, removeTask } = TasksSlice.actions;
+export const {addTask, editTask, removeTask, initStore} = TasksSlice.actions;
 
 const tasksReducer = TasksSlice.reducer
 
