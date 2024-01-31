@@ -7,14 +7,11 @@ export interface Task {
     completed: boolean;
 }
 
+const initialState = JSON.parse(localStorage.getItem('store') ?? 'null') 
+
 export const TasksSlice = createSlice({
     name: "Tasks",
-    initialState: [{
-        id: '1',
-        title: 'Learn JS',
-        desc: 'Learn JS desc',
-        completed: false
-    }] as Task[],
+    initialState: (initialState?.tasks ?? []) as Task[],
     reducers: {
         addTask(state, action: PayloadAction<Task>) {
             state.push(action.payload);

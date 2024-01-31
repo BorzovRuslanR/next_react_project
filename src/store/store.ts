@@ -11,4 +11,8 @@ const store = configureStore({
     }
 })
 
+store.subscribe(() => {
+    localStorage.setItem('store', JSON.stringify(store.getState()))
+})
+
 export default store
